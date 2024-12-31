@@ -164,7 +164,7 @@ void CLI::login()
         map<string, string> res = myMachine.login(username, password);
         if (res["code"] == "0")
         {
-            cout << GREEN <<"欢迎使用" << RESET << endl;
+            cout << GREEN << "您好，" << res["msg"] << "！欢迎使用" << RESET << endl;
             start("home");
             return;
         }

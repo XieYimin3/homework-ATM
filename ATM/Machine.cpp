@@ -17,11 +17,15 @@ Machine::~Machine()
 }
 
 map<string, string> Machine::login(string username, string password)
-{    
+{
+    //存放结果
     map<string, string> res;
+    //配置
     map<string, map<string, string>> config = userCfg.cfgData;
+    //遍历用户
     for (auto& i : config)
     {
+        //如果找到了用户
         if (i.first == username)
         {
             //错误次数
@@ -36,7 +40,8 @@ map<string, string> Machine::login(string username, string password)
                     is_login = true;
                     loginRec.remove(username);
                     res["code"] = "0";
-                    res["msg"] = "用户" + username + "成功登录";
+                    //返回用户姓名
+                    res["msg"] = i.second["name"];
                     return res;
                 }
                 //密码错误
@@ -75,7 +80,13 @@ map<string, string> Machine::withdraw(int value)
             res["msg"] = "不是100的整数倍";
             return res;
         }
-        else if (value >= 500)
+        else if (value <= 0)
+        {
+            res["code"] = "15";
+            res["msg"] = "金额不合法";
+            return res;
+        }
+        else if (value >= this->once_limit)
         {
             res["code"] = "9";
             res["msg"] = "超出单次取款限额";
@@ -87,7 +98,7 @@ map<string, string> Machine::withdraw(int value)
             res["msg"] = "余额不足";
             return res;
         }
-        else if ((withdrawRec.get_amount(current_user) + value) >= 2000)
+        else if ((withdrawRec.get_amount(current_user) + value) >= this->day_limit)
         {
             res["code"] = "8";
             res["msg"] = "超出单日取款限额";
@@ -116,6 +127,12 @@ map<string, string> Machine::revise_pwd(string old_pwd, string new_pwd)
         {
             res["code"] = "11";
             res["msg"] = "旧密码不正确";
+            return res;
+        }
+        else if (!is_pwd_valid(new_pwd))
+        {
+            res["code"] = "12";
+            res["msg"] = "密码不符合安全策略：6位 数字";
             return res;
         }
         else
@@ -213,6 +230,12 @@ map<string, string> Machine::transfer(string target_username, int value)
         {
             res["code"] = "10";
             res["msg"] = "目标用户不存在";
+            return res;
+        }
+        else if (value <= 0)
+        {
+            res["code"] = "15";
+            res["msg"] = "金额不合法";
             return res;
         }
         else if (remain < value)

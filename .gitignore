@@ -5,6 +5,9 @@
 
 #作者信息
 author.txt
+#程序运行产生的配置和日志文件
+/ATM/records/
+/ATM/configs/
 
 # User-specific files
 *.rsuser

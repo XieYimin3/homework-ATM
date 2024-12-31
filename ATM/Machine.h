@@ -25,6 +25,7 @@ code 11 旧密码不正确
 code 12 密码不符合安全策略
 code 13 虚假身份证号
 code 14 银行卡号不符合要求
+code 15 金额不合法
 */
 class Machine
 {
@@ -69,4 +70,8 @@ private:
     //身份证号校验位对应的加权因子
     const vector<int> verify_sum_vec = 
     {7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2};
+    //单日取款限额
+    const int day_limit = 2000;
+    //单次取款限额
+    const int once_limit = 500;
 };
