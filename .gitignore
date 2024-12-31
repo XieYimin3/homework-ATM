@@ -3,6 +3,9 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+#作者信息
+author.txt
+
 # User-specific files
 *.rsuser
 *.suo
