@@ -74,7 +74,13 @@ void CLI::cover() {
         cout << "[3] 帮助" << endl;
         cout << "[0] 退出系统" << endl;
         cout << RESET;
-        cin >> option;
+        
+        option = input_int();
+        if (option == -1)
+        {
+            cout << RED << "输入的不是数字！" << RESET << endl;
+            continue;
+        }
 
         if (option == 1) {
             start("login");
@@ -112,7 +118,14 @@ void CLI::home()
         cout << "[4] 修改密码" << endl;
         cout << "[0] 登出" << endl;
         cout << RESET;
-        cin >> option;
+        
+        option = input_int();
+        if (option == -1)
+        {
+            cout << RED << "输入的不是数字！" << RESET << endl;
+            continue;
+        }
+
         if (option == 1)
         {
             start("withdraw");
@@ -179,7 +192,14 @@ void CLI::login()
                 cout << "[0] 返回" << endl;
                 cout << RESET;
                 int option = -1;
-                cin >> option;
+                
+                option = input_int();
+                if (option == -1)
+                {
+                    cout << RED << "输入的不是数字！" << RESET << endl;
+                    continue;
+                }
+
                 if (option == 1)
                 {
                     break;
@@ -222,9 +242,15 @@ void CLI::withdraw()
 
     int value;
     cout << CYAN << "输入取款金额" << RESET << endl;
-    cin >> value;
-    map<string, string> res = myMachine.withdraw(value);
+    value = input_int();
+    if (value == -1)
+    {
+        cout << RED << "输入的不是数字！" << RESET << endl;
+        start("home");
+        return;
+    }
 
+    map<string, string> res = myMachine.withdraw(value);
     if (res["code"] == "0")
     {
         cout << GREEN << "取款成功" << RESET << endl;
@@ -295,7 +321,13 @@ void CLI::transfer()
     else
     {
         cout << CYAN << "输入转账金额：" << RESET << endl;
-        cin >> value;
+        value = input_int();
+        if (value == -1)
+        {
+            cout << RED << "输入的不是数字！" << RESET << endl;
+            start("home");
+            return;
+        }
         map<string, string> res = myMachine.transfer(target_username, value);
 
         if (res["code"] == "0")
@@ -328,7 +360,12 @@ void CLI::query()
         while (true)
         {
             cout << RGB_66CCFF << "[0] 返回" << RESET << endl;
-            cin >> option;
+            option = input_int();
+            if (option == -1)
+            {
+                cout << RED << "输入的不是数字！" << RESET << endl;
+                continue;
+            }
             if (option == 0)
             {
                 start("home");
@@ -474,4 +511,18 @@ void CLI::revise_pwd()
             return;
         }
     }
+}
+
+int CLI::input_int()
+{
+    int input;
+    cin >> input;
+    //检查输入的option是否为数字
+    if (cin.fail())
+    {
+        cin.clear();
+        cin.ignore(1024, '\n');
+        return - 1;
+    }
+    return input;
 }

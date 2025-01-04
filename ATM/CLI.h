@@ -33,4 +33,6 @@ private:
     map<string, function<void(CLI*)>> activity_map;
     //活动注册器
     void activity_register();
+    //输入正整数，否则返回-1
+    int input_int();
 };
