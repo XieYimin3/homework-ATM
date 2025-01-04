@@ -412,7 +412,14 @@ void CLI::start(string target)
     // 查找函数并调用
     auto it = activity_map.find(target);
     if (it != activity_map.end()) {
-        auto f = async(launch::async, it->second, this);
+        try
+        {
+            auto f = async(launch::async, it->second, this);
+        }
+        catch (const std::exception& e)
+        {
+            cout << RED << "启动活动时发生错误：" << e.what() << RESET << endl;
+        }
     }
     else {
         cout << "Invalid function id" << endl;
