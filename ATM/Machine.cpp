@@ -325,3 +325,13 @@ bool Machine::is_username_valid(string username)
     }
     return true;
 }
+
+int Machine::get_once_limit()
+{
+    return this->once_limit;
+}
+
+int Machine::get_day_limit()
+{
+    return this->day_limit;
+}

@@ -242,6 +242,10 @@ void CLI::withdraw()
 {
     title("取款");
 
+    //提示当前系统设定的单次和单日限额
+    cout << MAGENTA << "注意：当前系统设置的单次取款限额：" << myMachine.get_once_limit() << "元" << endl;
+    cout << "单日取款限额：" << myMachine.get_day_limit() << "元" << RESET << endl;
+
     int value;
     cout << CYAN << "输入取款金额" << RESET << endl;
     value = input_int();

@@ -48,6 +48,10 @@ public:
     map<string, string> query();
     //获取当前用户
     string get_current_user();
+    //获取单次取款限额
+    int get_once_limit();
+    //获取单日取款限额
+    int get_day_limit();
 
 
 private:
