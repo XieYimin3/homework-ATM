@@ -5,10 +5,21 @@
 #include "Machine.h"
 #include <iostream>
 #include <stdexcept>
+#include <csignal>
+#include <future>
 using namespace std;
+
+void signalHandler(int signum)
+{
+    cout << "\033[31m接收到信号：" << signum << "，即将退出程序！";
+    //等待2秒
+    this_thread::sleep_for(chrono::seconds(2));
+    exit(signum);
+}
 
 int main()
 {
+    signal(SIGINT, signalHandler);
     cout << "初始化中..." << endl;
     try
     {
