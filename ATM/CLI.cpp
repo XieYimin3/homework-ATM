@@ -95,7 +95,7 @@ void CLI::cover() {
             return;
         }
         else if (option == 0) {
-            cout << GREEN << "已退出，欢迎下次使用" << RESET << endl;
+            cout << GREEN << "已退出，欢迎下次使用！" << RESET << endl;
             //等待2秒
             this_thread::sleep_for(chrono::seconds(2));
             return;
