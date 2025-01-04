@@ -187,6 +187,7 @@ int Recorder::get_amount(string username)
     string line;
     //现在时间
     vector<int> nowtime = get_time();
+    //逐行读取
     while (getline(myStream, line))
     {
         vector<string> splited_line;
@@ -195,6 +196,11 @@ int Recorder::get_amount(string username)
         //如果是这个用户
         if (splited_line[1] == username)
         {
+            vector<string> str_timepart = split(splited_line[0], "-");
+            for (auto& i : str_timepart)
+            {
+                int_timepart.push_back(stoi(i));
+            }
             //并且如果是今天
             if (int_timepart[0] == nowtime[0] and int_timepart[1] == nowtime[1] and int_timepart[2] == nowtime[2])
             {

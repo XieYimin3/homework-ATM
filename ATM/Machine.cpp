@@ -86,7 +86,7 @@ map<string, string> Machine::withdraw(int value)
             res["msg"] = "金额不合法";
             return res;
         }
-        else if (value >= this->once_limit)
+        else if (value > this->once_limit)
         {
             res["code"] = "9";
             res["msg"] = "超出单次取款限额";
@@ -98,7 +98,7 @@ map<string, string> Machine::withdraw(int value)
             res["msg"] = "余额不足";
             return res;
         }
-        else if ((withdrawRec.get_amount(current_user) + value) >= this->day_limit)
+        else if ((withdrawRec.get_amount(current_user) + value) > this->day_limit)
         {
             res["code"] = "8";
             res["msg"] = "超出单日取款限额";
