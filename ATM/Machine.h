@@ -26,6 +26,7 @@ code 12 密码不符合安全策略
 code 13 虚假身份证号
 code 14 银行卡号不符合要求
 code 15 金额不合法
+code 16 新密码与旧密码相同
 */
 class Machine
 {

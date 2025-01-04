@@ -135,6 +135,12 @@ map<string, string> Machine::revise_pwd(string old_pwd, string new_pwd)
             res["msg"] = "密码不符合安全策略：6位 数字";
             return res;
         }
+        else if (old_pwd == new_pwd)
+        {
+            res["code"] = "16";
+            res["msg"] = "新密码与旧密码相同";
+            return res;
+        }
         else
         {
             userCfg.set(current_user, "password", new_pwd);
