@@ -232,7 +232,7 @@ map<string, string> Machine::transfer(string target_username, int value)
     if (is_login)
     {
         int remain = stoi(userCfg.cfgData[current_user]["remain"]);
-        int target_remain = stoi(userCfg.cfgData[current_user]["remain"]);
+        int target_remain = stoi(userCfg.cfgData[target_username]["remain"]);
         bool target_exist = false;
         for (auto& i : userCfg.cfgData)
         {
@@ -245,6 +245,12 @@ map<string, string> Machine::transfer(string target_username, int value)
         {
             res["code"] = "10";
             res["msg"] = "目标用户不存在";
+            return res;
+        }
+        else if (current_user == target_username)
+        {
+            res["code"] = "17";
+            res["msg"] = "不得向自己转账";
             return res;
         }
         else if (value <= 0)
