@@ -314,9 +314,9 @@ void CLI::transfer()
     int value;
     string target_username;
     string target_username_2;
-    cout << CYAN << "请输入对方用户账号 >>>" << RESET << endl;
+    cout << CYAN << "请输入对方用户账号 >>>" << RESET;
     cin >> target_username;
-    cout << MAGENTA << "为避免错误操作，请再次确认对方用户账号" << CYAN << " >>>" << RESET << endl;
+    cout << MAGENTA << "为避免错误操作，请再次确认对方用户账号" << CYAN << " >>>" << RESET;
     cin >> target_username_2;
     if (target_username != target_username_2)
     {
@@ -326,7 +326,7 @@ void CLI::transfer()
     }
     else
     {
-        cout << CYAN << "输入转账金额 >>>" << RESET << endl;
+        cout << CYAN << "输入转账金额 >>>" << RESET;
         value = input_int();
         if (value == -1)
         {
@@ -509,11 +509,11 @@ void CLI::revise_pwd()
 
     string old_pwd;
     string new_pwd;
-    cout << CYAN << "请输入旧密码 >>>" << RESET << endl;
+    cout << CYAN << "请输入旧密码 >>>" << RESET;
     old_pwd = input_password();
-    cout << CYAN << "请输入新密码 >>>" << RESET << endl;
+    cout << CYAN << "请输入新密码 >>>" << RESET;
     new_pwd = input_password();
-    cout << CYAN << "请再次确认新密码 >>>" << RESET << endl;
+    cout << CYAN << "请再次确认新密码 >>>" << RESET;
     if (new_pwd != input_password())
     {
         cout << RED << "两次输入的新密码不一致！" << RESET << endl;
