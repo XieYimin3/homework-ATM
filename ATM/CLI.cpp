@@ -73,7 +73,7 @@ void CLI::cover() {
         cout << "[2] 注册" << endl;
         cout << "[3] 帮助" << endl;
         cout << "[0] 退出系统" << endl;
-        cout << RESET;
+        cout << CYAN << "请输入选项 >>>" << RESET;
         
         option = input_int();
         if (option == -1)
@@ -119,7 +119,7 @@ void CLI::home()
         cout << "[3] 余额查询" << endl;
         cout << "[4] 修改密码" << endl;
         cout << "[0] 登出" << endl;
-        cout << RESET;
+        cout << CYAN << "请输入选项 >>>" << RESET;
         
         option = input_int();
         if (option == -1)
@@ -167,12 +167,12 @@ void CLI::login()
 
     string username;
     string password;
-    cout << CYAN << "插卡：（输入账号）" << RESET <<endl;
+    cout << CYAN << "插卡：（输入账号）>>>" << RESET;
     cin >> username;
     //循环输入密码
     while (true)
     {
-        cout << CYAN << "输入密码：" << RESET << endl;
+        cout << CYAN << "输入密码：>>>" << RESET;
         //输入密码
         password = this->input_password();
         //后端登录
@@ -192,7 +192,7 @@ void CLI::login()
                 cout << RGB_66CCFF;
                 cout << "[1] 重试" << endl;
                 cout << "[0] 返回" << endl;
-                cout << RESET;
+                cout << CYAN << "请输入选项 >>>" << RESET;
                 int option = -1;
                 
                 option = input_int();
@@ -247,7 +247,7 @@ void CLI::withdraw()
     cout << "单日取款限额：" << myMachine.get_day_limit() << "元" << RESET << endl;
 
     int value;
-    cout << CYAN << "输入取款金额" << RESET << endl;
+    cout << CYAN << "输入取款金额 >>>" << RESET;
     value = input_int();
     if (value == -1)
     {
@@ -275,15 +275,15 @@ void CLI::signup()
 {
     title("注册");
     string username, password, id, name;
-    cout << CYAN << "输入银行卡号（19位数字，用于登录）：" << RESET << endl;
+    cout << CYAN << "请输入银行卡号（19位数字，用于登录）>>>" << RESET;
     cin >> username;
-    cout << CYAN << "输入身份证号：" << RESET << endl;
+    cout << CYAN << "请输入身份证号 >>>" << RESET;
     cin >> id;
-    cout << CYAN << "输入姓名：" << RESET << endl;
+    cout << CYAN << "请输入姓名 >>>" << RESET;
     cin >> name;
-    cout << CYAN << "设置6位数字密码：" << RESET << endl;
+    cout << CYAN << "请设置6位数字密码 >>>" << RESET;
     password = input_password();
-    cout << CYAN << "确认密码：" << RESET << endl;
+    cout << CYAN << "请再次确认密码 >>>" << RESET;
     if (password != input_password())
     {
         cout << RED << "注册失败，因为：密码不一致" << RESET << endl;
@@ -314,9 +314,9 @@ void CLI::transfer()
     int value;
     string target_username;
     string target_username_2;
-    cout << CYAN << "输入对方用户账号：" << RESET << endl;
+    cout << CYAN << "请输入对方用户账号 >>>" << RESET << endl;
     cin >> target_username;
-    cout << MAGENTA << "为避免错误操作，请再次确认对方用户账号：" << RESET << endl;
+    cout << MAGENTA << "为避免错误操作，请再次确认对方用户账号" << CYAN << " >>>" << RESET << endl;
     cin >> target_username_2;
     if (target_username != target_username_2)
     {
@@ -326,7 +326,7 @@ void CLI::transfer()
     }
     else
     {
-        cout << CYAN << "输入转账金额：" << RESET << endl;
+        cout << CYAN << "输入转账金额 >>>" << RESET << endl;
         value = input_int();
         if (value == -1)
         {
@@ -366,6 +366,7 @@ void CLI::query()
         while (true)
         {
             cout << RGB_66CCFF << "[0] 返回" << RESET << endl;
+            cout << CYAN << "请输入选项 >>>" << RESET;
             option = input_int();
             if (option == -1)
             {
@@ -435,19 +436,38 @@ string CLI::input_password()
 void CLI::title(string title)
 {
     cout << RGB_66CCFF;
-    cout << setw(20) << setfill('_') << "";
-    cout << title;
-    cout << setw(20) << setfill('_') << "" << endl;
+    cout << endl << setw(20) << setfill('=') << "";
+    cout << ' ' << title << ' ';
+    cout << setw(20) << setfill('=') << "" << endl;
     cout << RESET;
 }
 
 void CLI::help()
 {
-    cout << "使用说明：" << endl;
+    title("帮助");
     //todo
     cout << "访问 https://github.com/XieYimin3/homework-ATM 以获取更多信息" << endl;
-    start("cover");
-    return;
+    while (true)
+    {
+        int option = -1;
+        cout << RGB_66CCFF << "[0] 返回" << RESET << endl;
+        cout << CYAN << "请输入选项 >>>" << RESET;
+        option = input_int();
+        if (option == -1)
+        {
+            cout << RED << "输入的不是数字！" << RESET << endl;
+            continue;
+        }
+        if (option == 0)
+        {
+            start("home");
+            return;
+        }
+        else
+        {
+            cout << RED << "???" << RESET << endl;
+        }
+    }
 }
 
 void CLI::start(string target)
@@ -489,11 +509,11 @@ void CLI::revise_pwd()
 
     string old_pwd;
     string new_pwd;
-    cout << CYAN << "输入旧密码：" << RESET << endl;
+    cout << CYAN << "请输入旧密码 >>>" << RESET << endl;
     old_pwd = input_password();
-    cout << CYAN << "输入新密码：" << RESET << endl;
+    cout << CYAN << "请输入新密码 >>>" << RESET << endl;
     new_pwd = input_password();
-    cout << CYAN << "再次确认新密码：" << RESET << endl;
+    cout << CYAN << "请再次确认新密码 >>>" << RESET << endl;
     if (new_pwd != input_password())
     {
         cout << RED << "两次输入的新密码不一致！" << RESET << endl;

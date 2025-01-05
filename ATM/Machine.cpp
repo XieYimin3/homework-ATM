@@ -44,11 +44,20 @@ map<string, string> Machine::login(string username, string password)
                     res["msg"] = i.second["name"];
                     return res;
                 }
-                //密码错误
+                //最后一次密码错误
+                else if (wrong_times == 2)
+                {
+                    res["code"] = "2";
+                    res["msg"] = "错误次数达到上限";
+                    //追加错误记录
+                    loginRec.write(username);
+                    return res;
+                }
+                //一般密码错误
                 else
                 {
                     res["code"] = "1";
-                    res["msg"] = to_string(3 - wrong_times);
+                    res["msg"] = to_string(2 - wrong_times);
                     //追加错误记录
                     loginRec.write(username);
                     return res;
