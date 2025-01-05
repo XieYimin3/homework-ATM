@@ -460,7 +460,7 @@ void CLI::help()
         }
         if (option == 0)
         {
-            start("home");
+            start("cover");
             return;
         }
         else
