@@ -69,7 +69,7 @@
     ```
 3. 使用Visual Studio打开解决方案：
     ```powershell
-    cd homework-ATM\ATM
+    cd homework-ATM
     .\ATM.sln
     ```
 3. 编译项目并运行。
